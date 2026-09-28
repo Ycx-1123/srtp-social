@@ -1,0 +1,47 @@
+{
+  "id": "workplace_conflict",
+  "title": "职场会议：从分歧升级到协作恢复",
+  "description": "项目排期讨论中，隐性否定、语速升高和封闭姿态逐渐叠加，系统以低干扰建议帮助团队回到问题本身。",
+  "duration_ms": 45000,
+  "seed": 20260925,
+  "participants": ["主持人", "产品负责人", "算法工程师"],
+  "phases": [
+    {"id": "baseline", "label": "协作基线", "start_ms": 0, "end_ms": 12000, "description": "信息交换稳定，系统只观察。"},
+    {"id": "escalation", "label": "细微偏差累积", "start_ms": 12000, "end_ms": 27000, "description": "打断、否定和非语言压力跨模态叠加。"},
+    {"id": "intervention", "label": "柔性引导", "start_ms": 27000, "end_ms": 35000, "description": "系统给出针对表达方式的低干扰建议。"},
+    {"id": "recovery", "label": "协作恢复", "start_ms": 35000, "end_ms": 45000, "description": "参与者重述问题并恢复轮流发言。"}
+  ],
+  "events": [
+    {"at_ms": 1000, "modality": "context", "features": {"phase": "baseline", "speaker": "主持人", "dialogue": "我们先确认本周目标，再看资源缺口。"}, "confidence": 1.0, "source": "scenario", "evidence": "议题与发言顺序清晰"},
+    {"at_ms": 2500, "modality": "semantic", "features": {"offense": 0.03, "microbias": 0.04, "category": "none"}, "confidence": 0.96, "source": "scenario", "evidence": "中性任务表达"},
+    {"at_ms": 4000, "modality": "acoustic", "features": {"arousal": 0.18, "speed_cps": 3.8, "volume": 0.34, "pause_ratio": 0.22}, "confidence": 0.93, "source": "scenario", "evidence": "语速和音量处于个人基线附近"},
+    {"at_ms": 5500, "modality": "vision", "features": {"negative": 0.08, "emotion": "neutral", "engagement": 0.83}, "confidence": 0.91, "source": "scenario", "evidence": "表情中性且持续注视屏幕"},
+    {"at_ms": 7000, "modality": "pose", "features": {"closed_posture": 0.12, "gaze_avoidance": 0.10, "interruption": 0.05}, "confidence": 0.86, "source": "scenario", "evidence": "姿态开放"},
+    {"at_ms": 10500, "modality": "context", "features": {"phase": "baseline", "speaker": "算法工程师", "dialogue": "模型接口周三可以交付，测试还需要两天。"}, "confidence": 1.0, "source": "scenario", "evidence": "陈述事实并保留不确定性"},
+
+    {"at_ms": 12500, "modality": "context", "features": {"phase": "escalation", "speaker": "产品负责人", "dialogue": "这个速度还是太慢了，你们技术同学总把事情想复杂。"}, "confidence": 1.0, "source": "scenario", "evidence": "从任务评价滑向群体化归因"},
+    {"at_ms": 13000, "modality": "semantic", "features": {"offense": 0.44, "microbias": 0.62, "category": "职业角色预设"}, "confidence": 0.88, "source": "scenario", "evidence": "“技术同学总是”属于概括性角色归因"},
+    {"at_ms": 14500, "modality": "acoustic", "features": {"arousal": 0.48, "speed_cps": 5.4, "volume": 0.58, "pause_ratio": 0.12}, "confidence": 0.90, "source": "scenario", "evidence": "语速上升且停顿减少"},
+    {"at_ms": 16000, "modality": "vision", "features": {"negative": 0.42, "emotion": "disgust", "engagement": 0.76}, "confidence": 0.78, "source": "scenario", "evidence": "短时皱眉，单帧不足以独立报警"},
+    {"at_ms": 17500, "modality": "pose", "features": {"closed_posture": 0.50, "gaze_avoidance": 0.28, "interruption": 0.46}, "confidence": 0.81, "source": "scenario", "evidence": "前倾并多次抢话"},
+    {"at_ms": 19000, "modality": "context", "features": {"phase": "escalation", "speaker": "算法工程师", "dialogue": "我还没讲完。风险不是想复杂，是数据本身不稳定。"}, "confidence": 1.0, "source": "scenario", "evidence": "讨论开始围绕表达方式而非任务"},
+    {"at_ms": 20500, "modality": "semantic", "features": {"offense": 0.60, "microbias": 0.58, "category": "强硬否定"}, "confidence": 0.92, "source": "scenario", "evidence": "连续否定与群体归因形成上下文链"},
+    {"at_ms": 22000, "modality": "acoustic", "features": {"arousal": 0.76, "speed_cps": 6.9, "volume": 0.78, "pause_ratio": 0.06}, "confidence": 0.94, "source": "scenario", "evidence": "高语速、高音量、极少停顿持续出现"},
+    {"at_ms": 23500, "modality": "vision", "features": {"negative": 0.72, "emotion": "angry", "engagement": 0.88}, "confidence": 0.89, "source": "scenario", "evidence": "负面表情由瞬时信号转为持续状态"},
+    {"at_ms": 25000, "modality": "pose", "features": {"closed_posture": 0.70, "gaze_avoidance": 0.18, "interruption": 0.82}, "confidence": 0.91, "source": "scenario", "evidence": "连续打断与高压姿态共同出现"},
+    {"at_ms": 26500, "modality": "semantic", "features": {"offense": 0.78, "microbias": 0.68, "category": "人身化否定"}, "confidence": 0.95, "source": "scenario", "evidence": "“你根本没考虑业务”将问题归因到个人能力"},
+
+    {"at_ms": 27500, "modality": "context", "features": {"phase": "intervention", "speaker": "SOCI-AI", "dialogue": "争议正在从排期转向对人的判断。可以先复述对方的约束，再讨论交付边界。"}, "confidence": 1.0, "source": "scenario", "evidence": "情境化、可执行且不公开指责个人"},
+    {"at_ms": 29000, "modality": "acoustic", "features": {"arousal": 0.60, "speed_cps": 5.5, "volume": 0.61, "pause_ratio": 0.14}, "confidence": 0.91, "source": "scenario", "evidence": "语速开始回落"},
+    {"at_ms": 30500, "modality": "semantic", "features": {"offense": 0.34, "microbias": 0.30, "category": "none"}, "confidence": 0.90, "source": "scenario", "evidence": "表达回到约束和方案"},
+    {"at_ms": 32000, "modality": "vision", "features": {"negative": 0.40, "emotion": "neutral", "engagement": 0.82}, "confidence": 0.87, "source": "scenario", "evidence": "面部紧张程度下降"},
+    {"at_ms": 34000, "modality": "pose", "features": {"closed_posture": 0.34, "gaze_avoidance": 0.16, "interruption": 0.28}, "confidence": 0.88, "source": "scenario", "evidence": "恢复轮流发言"},
+
+    {"at_ms": 36000, "modality": "context", "features": {"phase": "recovery", "speaker": "产品负责人", "dialogue": "我理解你担心数据漂移。我们把周三定义成接口联调，稳定性测试顺延两天。"}, "confidence": 1.0, "source": "scenario", "evidence": "复述约束并提出可协商边界"},
+    {"at_ms": 37500, "modality": "semantic", "features": {"offense": 0.08, "microbias": 0.06, "category": "none"}, "confidence": 0.96, "source": "scenario", "evidence": "任务导向表达"},
+    {"at_ms": 39000, "modality": "acoustic", "features": {"arousal": 0.24, "speed_cps": 4.1, "volume": 0.38, "pause_ratio": 0.21}, "confidence": 0.94, "source": "scenario", "evidence": "声学特征回归基线"},
+    {"at_ms": 40500, "modality": "vision", "features": {"negative": 0.10, "emotion": "neutral", "engagement": 0.86}, "confidence": 0.92, "source": "scenario", "evidence": "表情恢复中性"},
+    {"at_ms": 42000, "modality": "pose", "features": {"closed_posture": 0.14, "gaze_avoidance": 0.09, "interruption": 0.07}, "confidence": 0.89, "source": "scenario", "evidence": "姿态开放且无抢话"},
+    {"at_ms": 44000, "modality": "context", "features": {"phase": "recovery", "speaker": "主持人", "dialogue": "结论已记录：周三联调，周五给出稳定性报告。"}, "confidence": 1.0, "source": "scenario", "evidence": "议题形成明确结论"}
+  ]
+}

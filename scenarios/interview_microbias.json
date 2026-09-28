@@ -1,0 +1,46 @@
+{
+  "id": "interview_microbias",
+  "title": "结构化面试：礼貌表达中的隐性预设",
+  "description": "表面平静的面试中，性别、地域和教育背景预设逐渐叠加；系统在不推断恶意的前提下提示问题回到岗位能力。",
+  "duration_ms": 44000,
+  "seed": 20260926,
+  "participants": ["面试官", "候选人", "SOCI-AI"],
+  "phases": [
+    {"id": "baseline", "label": "结构化开场", "start_ms": 0, "end_ms": 9000, "description": "围绕岗位经历进行中性提问。"},
+    {"id": "escalation", "label": "礼貌预设累积", "start_ms": 9000, "end_ms": 27000, "description": "措辞礼貌，但问题逐渐转向群体和背景假设。"},
+    {"id": "intervention", "label": "问题重构", "start_ms": 27000, "end_ms": 35000, "description": "将预设性问题转换为可核验的岗位胜任力问题。"},
+    {"id": "recovery", "label": "公平评估恢复", "start_ms": 35000, "end_ms": 44000, "description": "双方回到具体项目证据与岗位要求。"}
+  ],
+  "events": [
+    {"at_ms": 800, "modality": "context", "features": {"phase": "baseline", "speaker": "面试官", "dialogue": "请用一个项目说明你如何协调跨团队交付。"}, "confidence": 1.0, "source": "scenario", "evidence": "岗位相关的开放问题"},
+    {"at_ms": 2200, "modality": "semantic", "features": {"offense": 0.02, "microbias": 0.03, "category": "none"}, "confidence": 0.97, "source": "scenario", "evidence": "无身份预设"},
+    {"at_ms": 3600, "modality": "acoustic", "features": {"arousal": 0.16, "speed_cps": 3.9, "volume": 0.32, "pause_ratio": 0.24}, "confidence": 0.93, "source": "scenario", "evidence": "声学状态平稳"},
+    {"at_ms": 5000, "modality": "vision", "features": {"negative": 0.05, "emotion": "neutral", "engagement": 0.84}, "confidence": 0.92, "source": "scenario", "evidence": "表情中性"},
+    {"at_ms": 6800, "modality": "pose", "features": {"closed_posture": 0.08, "gaze_avoidance": 0.10, "interruption": 0.03}, "confidence": 0.88, "source": "scenario", "evidence": "轮次完整"},
+    {"at_ms": 8600, "modality": "context", "features": {"phase": "baseline", "speaker": "候选人", "dialogue": "我把需求拆成接口清单，并让研发和运营共同确认验收标准。"}, "confidence": 1.0, "source": "scenario", "evidence": "使用具体行为证据"},
+
+    {"at_ms": 10200, "modality": "context", "features": {"phase": "escalation", "speaker": "面试官", "dialogue": "你表达得很细致。女生通常更擅长协调，你会不会不太喜欢强硬推进？"}, "confidence": 1.0, "source": "scenario", "evidence": "礼貌措辞包裹性别角色预设"},
+    {"at_ms": 11200, "modality": "semantic", "features": {"offense": 0.22, "microbias": 0.61, "category": "性别角色预设"}, "confidence": 0.93, "source": "scenario", "evidence": "将能力倾向归因于性别"},
+    {"at_ms": 12800, "modality": "vision", "features": {"negative": 0.07, "emotion": "neutral", "engagement": 0.82}, "confidence": 0.91, "source": "scenario", "evidence": "表情仍中性，说明仅靠情绪通道难以察觉"},
+    {"at_ms": 14300, "modality": "acoustic", "features": {"arousal": 0.28, "speed_cps": 4.5, "volume": 0.39, "pause_ratio": 0.17}, "confidence": 0.90, "source": "scenario", "evidence": "候选人停顿增加但未出现强烈情绪"},
+    {"at_ms": 15800, "modality": "pose", "features": {"closed_posture": 0.31, "gaze_avoidance": 0.34, "interruption": 0.10}, "confidence": 0.83, "source": "scenario", "evidence": "短暂回避注视，单独不足以判断"},
+    {"at_ms": 17400, "modality": "context", "features": {"phase": "escalation", "speaker": "候选人", "dialogue": "我更愿意根据风险等级选择推进方式，而不是按性格区分。"}, "confidence": 1.0, "source": "scenario", "evidence": "候选人主动把问题拉回工作方法"},
+    {"at_ms": 19000, "modality": "context", "features": {"phase": "escalation", "speaker": "面试官", "dialogue": "明白。你从小城市来，进入我们这种快节奏团队适应起来会不会比较慢？"}, "confidence": 1.0, "source": "scenario", "evidence": "地域背景被用于推断适应能力"},
+    {"at_ms": 20200, "modality": "semantic", "features": {"offense": 0.34, "microbias": 0.73, "category": "地域与能力预设"}, "confidence": 0.96, "source": "scenario", "evidence": "连续身份预设形成上下文链"},
+    {"at_ms": 21800, "modality": "acoustic", "features": {"arousal": 0.42, "speed_cps": 5.0, "volume": 0.46, "pause_ratio": 0.11}, "confidence": 0.91, "source": "scenario", "evidence": "应答节奏收紧"},
+    {"at_ms": 23400, "modality": "pose", "features": {"closed_posture": 0.48, "gaze_avoidance": 0.51, "interruption": 0.12}, "confidence": 0.86, "source": "scenario", "evidence": "回避注视与语义压力同窗出现"},
+    {"at_ms": 25000, "modality": "semantic", "features": {"offense": 0.38, "microbias": 0.79, "category": "教育背景门槛"}, "confidence": 0.95, "source": "scenario", "evidence": "连续背景假设进一步累积"},
+    {"at_ms": 26500, "modality": "vision", "features": {"negative": 0.16, "emotion": "neutral", "engagement": 0.70}, "confidence": 0.89, "source": "scenario", "evidence": "负面表情仍弱，凸显细微偏差特性"},
+
+    {"at_ms": 27800, "modality": "context", "features": {"phase": "intervention", "speaker": "SOCI-AI", "dialogue": "问题已多次从岗位证据转向身份背景。建议改问：请举例说明你在高压期限下如何推进分歧。"}, "confidence": 1.0, "source": "scenario", "evidence": "将身份假设转换为行为化问题"},
+    {"at_ms": 29400, "modality": "semantic", "features": {"offense": 0.09, "microbias": 0.12, "category": "none"}, "confidence": 0.96, "source": "scenario", "evidence": "问题回到岗位行为"},
+    {"at_ms": 31000, "modality": "acoustic", "features": {"arousal": 0.26, "speed_cps": 4.1, "volume": 0.35, "pause_ratio": 0.20}, "confidence": 0.93, "source": "scenario", "evidence": "对话节奏回落"},
+    {"at_ms": 33000, "modality": "pose", "features": {"closed_posture": 0.21, "gaze_avoidance": 0.18, "interruption": 0.05}, "confidence": 0.87, "source": "scenario", "evidence": "姿态重新开放"},
+
+    {"at_ms": 35200, "modality": "context", "features": {"phase": "recovery", "speaker": "面试官", "dialogue": "换个问法：上次项目延期时，你具体怎样让团队在两天内重新达成计划？"}, "confidence": 1.0, "source": "scenario", "evidence": "结构化行为问题"},
+    {"at_ms": 37000, "modality": "context", "features": {"phase": "recovery", "speaker": "候选人", "dialogue": "我先冻结非关键需求，再用风险清单让三方共同选择取舍。"}, "confidence": 1.0, "source": "scenario", "evidence": "提供可核验项目证据"},
+    {"at_ms": 38600, "modality": "semantic", "features": {"offense": 0.03, "microbias": 0.04, "category": "none"}, "confidence": 0.97, "source": "scenario", "evidence": "无身份归因"},
+    {"at_ms": 40300, "modality": "vision", "features": {"negative": 0.05, "emotion": "neutral", "engagement": 0.88}, "confidence": 0.92, "source": "scenario", "evidence": "投入度恢复"},
+    {"at_ms": 42500, "modality": "pose", "features": {"closed_posture": 0.09, "gaze_avoidance": 0.08, "interruption": 0.03}, "confidence": 0.90, "source": "scenario", "evidence": "轮次完整且姿态开放"}
+  ]
+}

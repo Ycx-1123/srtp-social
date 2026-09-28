@@ -1,0 +1,44 @@
+[
+  {
+    "phrase": "女生不适合",
+    "category": "gender_stereotype",
+    "weight": 0.96,
+    "explanation": "以性别概括能力或学科适配性"
+  },
+  {
+    "phrase": "女孩子学不好工科",
+    "category": "gender_stereotype",
+    "weight": 0.98,
+    "explanation": "把个人能力与性别刻板绑定"
+  },
+  {
+    "phrase": "你们那里的人都",
+    "category": "regional_stereotype",
+    "weight": 0.88,
+    "explanation": "按地域对群体作统一负面概括"
+  },
+  {
+    "phrase": "这你都不会",
+    "category": "ability_dismissal",
+    "weight": 0.82,
+    "explanation": "用反问贬低对方能力而非讨论任务"
+  },
+  {
+    "phrase": "你不用参加",
+    "category": "exclusion",
+    "weight": 0.84,
+    "explanation": "在缺少任务依据时排除参与机会"
+  },
+  {
+    "phrase": "你懂什么",
+    "category": "belittling",
+    "weight": 0.86,
+    "explanation": "否定发言者资格而非回应观点"
+  },
+  {
+    "phrase": "别这么敏感",
+    "category": "belittling",
+    "weight": 0.72,
+    "explanation": "以情绪标签消解对方表达的实际问题"
+  }
+]

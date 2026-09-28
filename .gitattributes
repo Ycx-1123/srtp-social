@@ -1,1 +1,8 @@
-*.pt filter=lfs diff=lfs merge=lfs -text
+*.onnx binary
+*.task binary
+*.wav binary
+*.sqlite binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.ico binary

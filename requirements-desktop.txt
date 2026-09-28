@@ -1,0 +1,14 @@
+# Native desktop runtime; install with Python 3.13 on Windows x64.
+numpy==2.3.5
+PySide6-Essentials==6.11.2
+sherpa-onnx==1.13.8
+sounddevice==0.5.5
+# MediaPipe requires the contrib distribution; install one cv2 distribution.
+opencv-contrib-python==4.13.0.92
+mediapipe==0.10.32
+# MediaPipe 0.10.32 imports its optional drawing helpers at module import.
+matplotlib>=3.10,<4
+pydantic>=2.12,<3
+# Freezing tools; do not install legacy research/web requirements for packaging.
+pyinstaller==6.22.3
+pyinstaller-hooks-contrib==2026.7

@@ -1,1 +1,28 @@
-﻿*.pt
+# Python / local environments
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.env
+.env.*
+!.env.example
+.venv/
+venv/
+
+# Local runtime data. The app stores user history under %LOCALAPPDATA% at
+# runtime; project-local data is only for developer diagnostics.
+data/
+
+# Build outputs and QA captures
+build/
+dist/
+artifacts/
+
+# Local Superpowers working files
+.superpowers/sdd/
+
+# Download archives are redundant once extracted into models/.
+models/*.tar
+models/*.tar.*
+models/*.zip

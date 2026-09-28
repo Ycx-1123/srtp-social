@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#07111f">
+  <title>SOCI-AI Studio · 细微社交偏差感知与引导</title>
+  <link rel="stylesheet" href="/assets/styles.css">
+</head>
+<body>
+  <div class="ambient ambient-a"></div>
+  <div class="ambient ambient-b"></div>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#" aria-label="SOCI-AI Studio 首页">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span><b>SOCI—AI</b><small>Social Intelligence Studio</small></span>
+      </a>
+      <nav class="primary-nav" aria-label="主要视图">
+        <button class="nav-item active" data-view="live"><span>01</span>实时自检</button>
+        <button class="nav-item" data-view="profile"><span>02</span>会后复盘</button>
+        <button class="nav-item" data-view="explain"><span>03</span>机制解释</button>
+        <button class="nav-item" data-view="evidence"><span>04</span>研究证据</button>
+        <button class="nav-item" data-view="replay"><span>05</span>备用回放</button>
+      </nav>
+      <div class="system-card">
+        <div class="system-row"><span class="status-dot"></span><span id="connection-status">正在连接</span></div>
+        <div class="system-row muted"><span>EDGE RUNTIME</span><b>离线</b></div>
+        <div class="system-row muted"><span>PRIVACY</span><b>本地闭环</b></div>
+      </div>
+      <p class="sidebar-note">SBI 2.0 / 多模态时序融合<br>东南大学 SRTP 原型系统</p>
+    </aside>
+
+    <main class="main-stage">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">SELF-AWARE SOCIAL COGNITION / EDGE LIVE</p>
+          <h1 id="page-title">实时微冒犯自检</h1>
+        </div>
+        <div id="live-primary-controls" class="live-primary-controls">
+          <span class="privacy-chip"><i></i>音视频仅在本机内存处理</span>
+          <button id="start-live" class="control-button live-start" aria-label="开始实时自检"><span>●</span>开始实时自检</button>
+          <button id="stop-live" class="icon-button live-stop" aria-label="结束并定格本次自检" title="结束本次自检并保留最后测量结果" disabled>■</button>
+        </div>
+      </header>
+
+      <section id="view-live" class="view active self-check-view" aria-label="真实单人微冒犯自检">
+        <div class="self-check-shell">
+          <div class="live-hero-meta">
+            <span id="live-evidence" class="evidence-pill insufficient">等待真实证据 · MEASURED</span>
+            <span id="live-session-state" class="live-session-state"><i></i>设备待命</span>
+          </div>
+
+          <article class="tree-stage" aria-label="社交友好状态生命树">
+            <canvas id="living-tree"></canvas>
+            <div class="tree-caption">
+              <span>YOUR SOCIAL PRESENCE</span>
+              <h2 id="live-state-title">生命树正在等待你</h2>
+              <p id="live-state-summary">允许摄像头与麦克风后，系统将观察你自己的表达方式。</p>
+            </div>
+            <div class="tree-score">
+              <span>微冒犯风险</span>
+              <strong id="live-sbi">0.0</strong>
+              <small>SBI / 100</small>
+            </div>
+          </article>
+
+          <aside class="self-camera glass-card">
+            <header><div><span>SELF CAMERA</span><b>本人视觉信号</b></div><em id="face-status">等待人脸</em></header>
+            <div class="camera-viewport">
+              <video id="camera-video" autoplay muted playsinline></video>
+              <canvas id="face-overlay" aria-label="人脸检测框"></canvas>
+              <div id="camera-placeholder" class="camera-placeholder" aria-live="polite">开始自检后显示本人画面</div>
+              <div class="camera-corners" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+            </div>
+            <div id="facial-cue-readout" class="facial-cue-readout" aria-live="polite">眉间与唇部动作线索将在本机分析</div>
+            <footer><span><i class="sensor-light"></i>FER + FACE ACTION</span><b id="vision-confidence">—</b></footer>
+          </aside>
+
+          <aside class="self-metrics glass-card">
+            <header><div><span>SELF CHECK</span><b>当前对话状态</b></div><em>MEASURED</em></header>
+            <div class="friendliness-orb">
+              <svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="51"></circle><circle id="friendliness-ring" cx="60" cy="60" r="51"></circle></svg>
+              <div><strong id="live-friendliness">—</strong><span id="friendliness-label">等待有效信号</span></div>
+            </div>
+            <div class="live-metric-list">
+              <div><span>语气压力</span><i><b id="tone-meter"></b></i><em id="tone-value">0</em></div>
+              <div><span>视觉紧张</span><i><b id="visual-meter"></b></i><em id="visual-value">0</em></div>
+              <div><span>语义偏差</span><i><b id="semantic-meter"></b></i><em id="semantic-value">0</em></div>
+            </div>
+            <div class="live-activity-row"><span>实时信号更新 <b id="live-sequence">#0</b></span><em id="live-activity">0%</em></div>
+          </aside>
+
+          <article class="voice-console glass-card">
+            <div class="voice-status-block">
+              <span class="voice-icon" aria-hidden="true">◉</span>
+              <div><small>VOICE INTELLIGENCE</small><b id="speech-state" data-state="idle">等待开始</b></div>
+            </div>
+            <canvas id="audio-wave" aria-label="实时麦克风波形"></canvas>
+            <div class="transcript-block"><small>最新识别</small><p id="live-transcript">开始后，你说的话会在这里实时转写。</p></div>
+          </article>
+
+          <article class="live-guidance glass-card">
+            <span class="guidance-symbol">✦</span>
+            <div><small>GENTLE GUIDANCE / 低打扰引导</small><p id="live-suggestion">系统尚未开始，不对你的言行作任何判断。</p></div>
+            <button id="live-detail-toggle" type="button" aria-expanded="false">观察详情 <span>⌄</span></button>
+          </article>
+
+          <div id="live-detail-drawer" class="live-detail-drawer" hidden>
+            <div><span>视觉证据</span><b id="detail-vision">等待有效人脸</b></div>
+            <div><span>声学证据</span><b id="detail-audio">等待有效语音</b></div>
+            <div><span>语义证据</span><b id="detail-semantic">等待实时转写</b></div>
+            <div><span>隐私状态</span><b>不保存原始音视频</b></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="view-replay" class="view" aria-label="备用模拟回放">
+        <div class="replay-notice"><span>SIMULATED / 备用回放</span><p>仅用于无摄像头或无麦克风时展示系统机制，不代表实时检测结果。</p></div>
+        <div id="scenario-controls" class="scenario-controls replay-controls">
+          <label class="select-wrap">
+            <span class="sr-only">选择演示场景</span>
+            <select id="scenario-select" aria-label="选择演示场景"></select>
+          </label>
+          <button id="reset-button" class="icon-button" aria-label="重置场景" title="重置场景">↺</button>
+          <button id="play-button" class="control-button" aria-label="播放场景"><span>▶</span>播放场景</button>
+          <button id="pause-button" class="icon-button" aria-label="暂停播放" title="暂停播放">Ⅱ</button>
+          <label class="select-wrap compact">
+            <span class="sr-only">播放速度</span>
+            <select id="speed-select" aria-label="播放速度">
+              <option value="0.5">0.5×</option><option value="1" selected>1×</option>
+              <option value="1.5">1.5×</option><option value="2">2×</option><option value="4">4×</option>
+            </select>
+          </label>
+        </div>
+        <div class="live-grid">
+          <article class="context-panel panel">
+            <div class="panel-heading">
+              <div><span class="kicker">CONTEXT STREAM</span><h2>对话语境</h2></div>
+              <span id="phase-label" class="phase-chip">协作基线</span>
+            </div>
+            <div id="dialogue-stream" class="dialogue-stream" aria-live="polite">
+              <div class="empty-state">等待场景开始<br><small>系统仅展示去标识化的演示对话</small></div>
+            </div>
+            <div class="privacy-note"><span>◈</span><p><b>隐私边界</b><br>原始音视频不离开设备，仅保留结构化特征。</p></div>
+          </article>
+
+          <article class="fusion-stage panel">
+            <div class="stage-meta">
+              <span class="kicker">SUBTLE BIAS INDEX 2.0</span>
+              <span id="evidence-status" class="evidence-pill insufficient">证据不足 · SIMULATED</span>
+            </div>
+            <div class="energy-field" id="energy-field">
+              <div class="orbit orbit-a"></div><div class="orbit orbit-b"></div><div class="orbit orbit-c"></div>
+              <div class="energy-core">
+                <span class="core-label">当前 SBI</span>
+                <strong id="sbi-value">2.1</strong>
+                <span id="risk-label" class="risk-label">安全基线</span>
+              </div>
+              <div class="sensor sensor-semantic"><i></i><span>语义</span></div>
+              <div class="sensor sensor-acoustic"><i></i><span>声学</span></div>
+              <div class="sensor sensor-vision"><i></i><span>表情</span></div>
+              <div class="sensor sensor-pose"><i></i><span>姿态</span></div>
+            </div>
+            <div class="fusion-footer">
+              <div><span>瞬时风险</span><b id="instant-risk">0.00</b></div>
+              <div><span>时序能量</span><b id="energy-value">0.00</b></div>
+              <div><span>主导通道</span><b id="dominant-modalities">等待证据</b></div>
+            </div>
+          </article>
+
+          <aside class="evidence-rail panel">
+            <div class="panel-heading"><div><span class="kicker">EVIDENCE RAIL</span><h2>跨模态证据</h2></div><span class="live-tag">LIVE</span></div>
+            <div id="modality-grid" class="modality-grid"></div>
+            <div class="explain-brief"><span>系统判断</span><p id="explanation-text">等待多模态证据进入时间窗。</p></div>
+          </aside>
+
+          <article class="intervention-strip panel">
+            <div class="intervention-signal" id="intervention-signal"><span>引导策略</span><b id="intervention-action">静默观察</b></div>
+            <div class="intervention-copy"><span class="kicker">LOW-FRICTION GUIDANCE</span><p id="intervention-message">系统已就绪，保持静默观察。</p><small id="intervention-reason">ready · SIMULATED</small></div>
+          </article>
+
+          <article class="timeline-panel panel">
+            <div class="timeline-head">
+              <div><span class="kicker">TEMPORAL FUSION</span><h2>偏差能量时间窗</h2></div>
+              <div class="legend"><span><i class="cyan"></i>SBI</span><span><i class="amber"></i>引导阈值</span><span><i class="violet"></i>干预事件</span></div>
+            </div>
+            <canvas id="sbi-chart" aria-label="SBI 时序变化图"></canvas>
+            <div class="scrubber-row"><span id="elapsed-time">00:00</span><input id="time-scrubber" type="range" min="0" max="45000" value="0" aria-label="场景时间轴"><span id="duration-time">00:45</span></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="view-explain" class="view secondary-view">
+        <div class="section-intro"><div><span class="kicker">02 / EXPLAINABLE FUSION</span><h2>从弱信号到可解释判断</h2></div><p>不以单一表情或一句话给人贴标签；只有独立通道在同一时间窗内形成一致趋势时，系统才提高 SBI。</p></div>
+        <div class="explain-layout">
+          <article class="panel detail-panel"><div class="detail-heading"><span>实时贡献排序</span><b id="explain-sbi">SBI 2.1</b></div><div id="contribution-ranking" class="ranking-list"></div></article>
+          <article class="panel detail-panel"><div class="detail-heading"><span>可靠度门控</span><b>QUALITY GATING</b></div><div id="reliability-grid" class="reliability-grid"></div></article>
+          <article class="panel formula-panel"><span class="kicker">SBI 2.0 / LEAKY TEMPORAL INTEGRATION</span><div class="formula">E<sub>t</sub> = E<sub>t−1</sub> · e<sup>−Δt/τ</sup> + R<sub>multi</sub> + Γ<sub>synergy</sub></div><p id="explain-reasoning">等待信号进入时间窗。</p><div class="formula-notes"><span>τ 时间衰减</span><span>q 可靠度门控</span><span>Γ 跨模态协同</span></div></article>
+        </div>
+      </section>
+      <section id="view-intervention" class="view secondary-view">
+        <div class="section-intro"><div><span class="kicker">03 / COUNTERFACTUAL POLICY LAB</span><h2>同一时刻，三种干预强度</h2></div><p>策略遵循“最小充分干预”：证据不足时保持安静，趋势累积后才提供面向表达方式的建议。</p></div>
+        <div id="policy-comparison" class="policy-comparison"></div>
+        <article class="panel policy-principle"><span class="kicker">POLICY GUARDRAIL</span><h3>干预对象是交流过程，不是参与者人格</h3><p>建议聚焦复述约束、轮流发言和回到任务边界；不公开指责、不推断动机，也不以一次异常触发强提示。</p></article>
+      </section>
+      <section id="view-profile" class="view secondary-view">
+        <div class="section-intro"><div><span class="kicker">04 / SESSION-ONLY PROFILE</span><h2>会话趋势，而非心理标签</h2></div><p>画像在会话结束后可立即清除，只呈现当前互动中的节奏、峰值、恢复与主导证据。</p></div>
+        <div class="profile-grid">
+          <article class="panel profile-chart"><div class="detail-heading"><span>会话内 SBI 趋势</span><b>SIMULATED</b></div><canvas id="profile-trend" aria-label="会话内 SBI 趋势"></canvas></article>
+          <article class="panel profile-stats"><div class="profile-stat"><span>当前峰值</span><b id="profile-peak">2.1</b></div><div class="profile-stat"><span>窗口均值</span><b id="profile-mean">2.1</b></div><div class="profile-stat"><span>主导信号</span><b id="profile-dominant">—</b></div><div class="profile-stat"><span>恢复状态</span><b id="profile-recovery">观察中</b></div></article>
+          <article class="panel boundary-card"><span class="kicker">BOUNDARY</span><h3>我们刻意不做什么</h3><ul><li>不推断人格、疾病或主观恶意</li><li>不跨会话追踪个人身份</li><li>不保存原始音视频</li><li>不替代人工判断或组织治理</li></ul></article>
+        </div>
+      </section>
+      <section id="view-evidence" class="view secondary-view">
+        <div class="section-intro"><div><span class="kicker">05 / RESEARCH & ENGINEERING EVIDENCE</span><h2>每项能力都有来源标签</h2></div><p>实测表示代码或数据直接计算，目标表示待独立验证的工程目标，模拟表示用于可重复演示的确定性场景。</p></div>
+        <div class="provenance-legend"><span class="measured">MEASURED · 实测</span><span class="target">TARGET · 目标</span><span class="simulated">SIMULATED · 模拟</span></div>
+        <article id="dataset-audit-card" class="panel dataset-audit-card">
+          <div><span class="kicker">DATASET INTEGRITY / SHA-256</span><h3 id="audit-verdict">数据集审计加载中</h3><p id="audit-conclusion">正在读取预生成的只读审计报告。</p></div>
+          <div class="audit-stats"><span><b id="audit-total">—</b>文件总数</span><span><b id="audit-train">—</b>训练集</span><span><b id="audit-val">—</b>验证集</span><span><b id="audit-leaked">—</b>跨划分重复</span></div>
+        </article>
+        <div id="adapter-health-grid" class="adapter-health-grid"></div>
+        <div id="model-card-grid" class="model-card-grid"></div>
+        <article class="panel privacy-boundary"><span class="kicker">PRIVACY BY DEFAULT</span><h3>端侧闭环与数据最小化</h3><p id="privacy-boundary-text">原始音视频仅在设备内存中处理；演示模式完全使用合成事件。</p></article>
+      </section>
+    </main>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script type="module" src="/assets/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+[
+  {
+    "id": "facial-affect",
+    "name": "YOLOv8-FER 表情通道",
+    "role": "捕捉短时负面情绪与投入度变化；单帧结果不独立触发干预。",
+    "stage": "adapter-ready",
+    "input": "设备摄像头帧 / 224×224 ROI",
+    "output": "7 类情绪分布、negative、engagement、置信度",
+    "metrics": [
+      {"name": "端侧推理延迟", "value": "≤45", "unit": "ms/frame", "provenance": "target", "note": "轻薄本 CPU/NPU 优化目标"},
+      {"name": "场景置信度", "value": "0.78–0.92", "unit": "score", "provenance": "simulated", "note": "答辩场景的确定性信号"}
+    ],
+    "limitations": ["表情与真实意图并非一一对应", "当前数据划分需先完成泄漏审计后才能报告泛化指标"]
+  },
+  {
+    "id": "speech-prosody",
+    "name": "SenseVoice 声学 / ASR 通道",
+    "role": "同时提取转写、语速、音量、停顿与唤醒度，关注相对个人基线变化。",
+    "stage": "optional-adapter",
+    "input": "16 kHz 单声道音频窗口",
+    "output": "transcript、speed_cps、volume、pause_ratio、arousal",
+    "metrics": [
+      {"name": "流式窗口", "value": "1.5", "unit": "s", "provenance": "target", "note": "低延迟与稳定性的折中"},
+      {"name": "场景置信度", "value": "0.90–0.94", "unit": "score", "provenance": "simulated", "note": "用于展示可靠度门控"}
+    ],
+    "limitations": ["噪声环境会影响韵律估计", "声学唤醒不等同于负面情绪"]
+  },
+  {
+    "id": "semantic-microbias",
+    "name": "COLD / CBBQ 微偏差语义通道",
+    "role": "识别概括性角色归因、强硬否定和人身化表达，并保留上下文链。",
+    "stage": "research-prototype",
+    "input": "去标识化对话上下文",
+    "output": "offense、microbias、category、evidence span",
+    "metrics": [
+      {"name": "宏平均 F1", "value": "≥0.84", "unit": "F1", "provenance": "target", "note": "需使用独立测试集验证"},
+      {"name": "演示类别覆盖", "value": "3", "unit": "types", "provenance": "simulated", "note": "角色预设、强硬否定、人身化否定"}
+    ],
+    "limitations": ["反讽和组织内部语境仍具挑战", "不用于判定个人品格或主观恶意"]
+  },
+  {
+    "id": "interaction-pose",
+    "name": "姿态与轮次互动通道",
+    "role": "估计封闭姿态、注视回避和连续打断，提供群体互动层证据。",
+    "stage": "optional-adapter",
+    "input": "人体关键点与发言轮次",
+    "output": "closed_posture、gaze_avoidance、interruption",
+    "metrics": [
+      {"name": "关键点刷新率", "value": "≥12", "unit": "FPS", "provenance": "target", "note": "普通核显设备目标"},
+      {"name": "场景置信度", "value": "0.81–0.91", "unit": "score", "provenance": "simulated", "note": "跨模态协同演示"}
+    ],
+    "limitations": ["遮挡和多人重叠会降低可靠度", "文化差异影响姿态含义"]
+  },
+  {
+    "id": "sbi-fusion",
+    "name": "SBI 2.0 时序融合引擎",
+    "role": "以可靠度门控、跨模态协同和泄漏积分区分瞬时噪声与持续细微偏差。",
+    "stage": "implemented",
+    "input": "四通道特征、置信度、上下文与时间戳",
+    "output": "0–100 SBI、风险级别、贡献排序、解释与干预策略",
+    "metrics": [
+      {"name": "融合通道", "value": "4", "unit": "modalities", "provenance": "measured", "note": "代码路径自动化测试覆盖"},
+      {"name": "演示重放一致性", "value": "deterministic", "unit": "seeded", "provenance": "measured", "note": "同一场景产生相同事件序列"},
+      {"name": "端到端交互延迟", "value": "≤250", "unit": "ms", "provenance": "target", "note": "真实适配器接入后的工程目标"}
+    ],
+    "limitations": ["当前阈值为原型参数而非临床或组织规范", "SBI 是会话风险指标，不是心理测量或事实裁决"]
+  }
+]

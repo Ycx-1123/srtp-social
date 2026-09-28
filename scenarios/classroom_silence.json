@@ -1,0 +1,46 @@
+{
+  "id": "classroom_silence",
+  "title": "课堂讨论：沉默不等于缺席",
+  "description": "小组讨论中，安静学生被快速归因为准备不足；系统结合参与结构与语境，建议增加等待时间和文字通道，而不把安静本身视为违规。",
+  "duration_ms": 46000,
+  "seed": 20260927,
+  "participants": ["教师", "学生甲", "学生乙", "SOCI-AI"],
+  "phases": [
+    {"id": "baseline", "label": "开放讨论", "start_ms": 0, "end_ms": 11000, "description": "教师提出问题并留出思考时间。"},
+    {"id": "escalation", "label": "参与失衡累积", "start_ms": 11000, "end_ms": 28500, "description": "发言集中、沉默被归因，打断和注视回避逐渐出现。"},
+    {"id": "intervention", "label": "包容性引导", "start_ms": 28500, "end_ms": 36500, "description": "增加等待时间与文字参与选项。"},
+    {"id": "recovery", "label": "多通道参与", "start_ms": 36500, "end_ms": 46000, "description": "安静学生通过文字和完整轮次贡献观点。"}
+  ],
+  "events": [
+    {"at_ms": 900, "modality": "context", "features": {"phase": "baseline", "speaker": "教师", "dialogue": "先想三十秒：算法公平需要考虑哪些利益相关方？"}, "confidence": 1.0, "source": "scenario", "evidence": "明确提供思考时间"},
+    {"at_ms": 2400, "modality": "semantic", "features": {"offense": 0.02, "microbias": 0.02, "category": "none"}, "confidence": 0.97, "source": "scenario", "evidence": "中性教学指令"},
+    {"at_ms": 4000, "modality": "acoustic", "features": {"arousal": 0.14, "speed_cps": 3.5, "volume": 0.30, "pause_ratio": 0.31}, "confidence": 0.92, "source": "scenario", "evidence": "语速平稳并保留停顿"},
+    {"at_ms": 5700, "modality": "vision", "features": {"negative": 0.04, "emotion": "neutral", "engagement": 0.79}, "confidence": 0.89, "source": "scenario", "evidence": "学生注视材料"},
+    {"at_ms": 7400, "modality": "pose", "features": {"closed_posture": 0.18, "gaze_avoidance": 0.22, "interruption": 0.04}, "confidence": 0.84, "source": "scenario", "evidence": "安静但未出现互动冲突"},
+    {"at_ms": 9800, "modality": "context", "features": {"phase": "baseline", "speaker": "学生甲", "dialogue": "我认为要同时看被误伤的人和系统部署者。"}, "confidence": 1.0, "source": "scenario", "evidence": "讨论正常开始"},
+
+    {"at_ms": 11600, "modality": "context", "features": {"phase": "escalation", "speaker": "学生甲", "dialogue": "我再补充三点，其实这个问题答案很明显。"}, "confidence": 1.0, "source": "scenario", "evidence": "同一参与者持续占据发言轮次"},
+    {"at_ms": 13000, "modality": "pose", "features": {"closed_posture": 0.35, "gaze_avoidance": 0.40, "interruption": 0.44}, "confidence": 0.85, "source": "scenario", "evidence": "发言集中并出现抢话"},
+    {"at_ms": 14600, "modality": "acoustic", "features": {"arousal": 0.37, "speed_cps": 5.4, "volume": 0.48, "pause_ratio": 0.08}, "confidence": 0.90, "source": "scenario", "evidence": "停顿显著减少，其他人难以进入"},
+    {"at_ms": 16200, "modality": "context", "features": {"phase": "escalation", "speaker": "教师", "dialogue": "学生乙一直不说话，是不是今天没有准备？"}, "confidence": 1.0, "source": "scenario", "evidence": "将沉默直接归因为准备不足"},
+    {"at_ms": 17500, "modality": "semantic", "features": {"offense": 0.24, "microbias": 0.52, "category": "参与方式预设"}, "confidence": 0.93, "source": "scenario", "evidence": "忽略思考、焦虑或偏好文字表达等可能性"},
+    {"at_ms": 19000, "modality": "vision", "features": {"negative": 0.28, "emotion": "anxious", "engagement": 0.67}, "confidence": 0.76, "source": "scenario", "evidence": "短暂紧张，单帧不能证明未准备"},
+    {"at_ms": 20600, "modality": "pose", "features": {"closed_posture": 0.58, "gaze_avoidance": 0.71, "interruption": 0.36}, "confidence": 0.87, "source": "scenario", "evidence": "注视回避与公开点名同窗出现"},
+    {"at_ms": 22200, "modality": "context", "features": {"phase": "escalation", "speaker": "学生甲", "dialogue": "他平时就比较内向，我先替他说吧。"}, "confidence": 1.0, "source": "scenario", "evidence": "用性格标签替代本人表达"},
+    {"at_ms": 23600, "modality": "semantic", "features": {"offense": 0.31, "microbias": 0.66, "category": "性格化归因"}, "confidence": 0.95, "source": "scenario", "evidence": "连续归因强化参与不平等"},
+    {"at_ms": 25200, "modality": "acoustic", "features": {"arousal": 0.52, "speed_cps": 6.0, "volume": 0.55, "pause_ratio": 0.05}, "confidence": 0.92, "source": "scenario", "evidence": "轮次切换空间进一步缩小"},
+    {"at_ms": 27000, "modality": "pose", "features": {"closed_posture": 0.67, "gaze_avoidance": 0.76, "interruption": 0.62}, "confidence": 0.90, "source": "scenario", "evidence": "参与失衡跨模态持续"},
+
+    {"at_ms": 29100, "modality": "context", "features": {"phase": "intervention", "speaker": "SOCI-AI", "dialogue": "沉默本身不是风险。当前问题是发言机会不均。建议留出十秒，并允许先在共享板写下观点。"}, "confidence": 1.0, "source": "scenario", "evidence": "区分个人安静与互动结构问题"},
+    {"at_ms": 30800, "modality": "context", "features": {"phase": "intervention", "speaker": "教师", "dialogue": "我们暂停十秒。可以口头说，也可以先把关键词写到共享板。"}, "confidence": 1.0, "source": "scenario", "evidence": "提供多种参与通道"},
+    {"at_ms": 32400, "modality": "acoustic", "features": {"arousal": 0.24, "speed_cps": 3.7, "volume": 0.33, "pause_ratio": 0.29}, "confidence": 0.94, "source": "scenario", "evidence": "等待时间恢复"},
+    {"at_ms": 34200, "modality": "pose", "features": {"closed_posture": 0.39, "gaze_avoidance": 0.43, "interruption": 0.13}, "confidence": 0.88, "source": "scenario", "evidence": "打断下降，仍允许个体差异"},
+    {"at_ms": 35800, "modality": "semantic", "features": {"offense": 0.07, "microbias": 0.08, "category": "none"}, "confidence": 0.96, "source": "scenario", "evidence": "表达转为选择支持"},
+
+    {"at_ms": 37400, "modality": "context", "features": {"phase": "recovery", "speaker": "学生乙", "dialogue": "我写的是：还要考虑没有被采样的人，因为他们的数据沉默不代表没有影响。"}, "confidence": 1.0, "source": "scenario", "evidence": "通过偏好的通道贡献实质观点"},
+    {"at_ms": 39200, "modality": "vision", "features": {"negative": 0.08, "emotion": "neutral", "engagement": 0.86}, "confidence": 0.90, "source": "scenario", "evidence": "投入度恢复"},
+    {"at_ms": 40800, "modality": "pose", "features": {"closed_posture": 0.20, "gaze_avoidance": 0.24, "interruption": 0.06}, "confidence": 0.89, "source": "scenario", "evidence": "轮次完整"},
+    {"at_ms": 42400, "modality": "semantic", "features": {"offense": 0.03, "microbias": 0.04, "category": "none"}, "confidence": 0.97, "source": "scenario", "evidence": "对观点进行任务导向回应"},
+    {"at_ms": 44800, "modality": "context", "features": {"phase": "recovery", "speaker": "教师", "dialogue": "这个观点很关键。接下来我们保留口头和文字两个入口。"}, "confidence": 1.0, "source": "scenario", "evidence": "参与结构形成可持续调整"}
+  ]
+}
